@@ -1,2 +1,2 @@
 def verify_token(token: str):
-    return True
+    return True 
