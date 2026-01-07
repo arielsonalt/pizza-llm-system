@@ -1,0 +1,55 @@
+# Core
+python-dotenv==1.0.1
+pydantic==2.11.1
+pydantic-settings==2.5.2
+typing-extensions==4.13.2
+
+# FastAPI & ASGI
+fastapi==0.110.0
+uvicorn==0.32.1
+httpx==0.27.2
+
+# Async
+anyio==4.7.0
+
+# LangChain / Agents / Graph (compatible with pydantic >=2.11)
+langchain==0.1.16
+langchain-community==0.0.34
+langchain-core==0.1.48
+langgraph==0.0.40
+
+# RAG (LlamaIndex – conservative, existing versions)
+llama-index==0.10.30
+llama-index-llms-openai==0.1.15
+llama-index-embeddings-openai==0.1.9
+llama-index-vector-stores-postgres==0.1.14
+
+# MCP
+mcp==1.25.0
+
+# Database
+sqlalchemy==2.0.29
+psycopg2-binary==2.9.9
+pgvector==0.2.5
+
+# Resilience
+tenacity==8.2.3
+
+# Observability
+opentelemetry-api==1.24.0
+opentelemetry-sdk==1.24.0
+opentelemetry-instrumentation-fastapi==0.45b0
+opentelemetry-instrumentation-httpx==0.45b0
+prometheus-client==0.20.0
+
+# Utils
+orjson==3.10.1
+python-multipart==0.0.9
+
+# Security / Auth
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+
+# Testing
+pytest==8.1.1
+pytest-asyncio==0.23.6

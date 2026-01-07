@@ -1,0 +1,149 @@
+{
+  "type": "FeatureCollection",
+  "name": "pizza_chop_delivery_zones_orlando_ca_fictional",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "feature_type": "store",
+        "store_name": "Pizza Chop - Orlando, CA (Fictional)",
+        "address": "100 Market St, Orlando, CA (Fictional)",
+        "phone": "+1 (555) 010-2020",
+        "hours": "11:00-23:00"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -118.41,
+          33.985
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "feature_type": "delivery_zone",
+        "zone_id": "A",
+        "zone_name": "Zone A - Core",
+        "delivery_fee_usd": 2.99,
+        "min_order_usd": 15.0,
+        "eta_minutes_min": 20,
+        "eta_minutes_max": 35,
+        "service_notes": "High priority dispatch. Best effort fastest delivery."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.425,
+              33.995
+            ],
+            [
+              -118.395,
+              33.995
+            ],
+            [
+              -118.395,
+              33.975
+            ],
+            [
+              -118.425,
+              33.975
+            ],
+            [
+              -118.425,
+              33.995
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "feature_type": "delivery_zone",
+        "zone_id": "B",
+        "zone_name": "Zone B - Standard",
+        "delivery_fee_usd": 4.49,
+        "min_order_usd": 18.0,
+        "eta_minutes_min": 30,
+        "eta_minutes_max": 50,
+        "service_notes": "Standard dispatch. ETAs may vary by demand and traffic."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.445,
+              34.005
+            ],
+            [
+              -118.375,
+              34.005
+            ],
+            [
+              -118.375,
+              33.965
+            ],
+            [
+              -118.445,
+              33.965
+            ],
+            [
+              -118.445,
+              34.005
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "feature_type": "delivery_zone",
+        "zone_id": "C",
+        "zone_name": "Zone C - Extended",
+        "delivery_fee_usd": 6.99,
+        "min_order_usd": 25.0,
+        "eta_minutes_min": 45,
+        "eta_minutes_max": 75,
+        "service_notes": "Extended range. Limited driver availability during peak hours."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.47,
+              34.02
+            ],
+            [
+              -118.35,
+              34.02
+            ],
+            [
+              -118.35,
+              33.95
+            ],
+            [
+              -118.47,
+              33.95
+            ],
+            [
+              -118.47,
+              34.02
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

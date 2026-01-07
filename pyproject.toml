@@ -1,0 +1,2 @@
+[pizza-llm-system]
+requires-python = ">=3.11,<3.12"
