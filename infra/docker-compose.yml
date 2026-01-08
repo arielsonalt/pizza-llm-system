@@ -2,14 +2,54 @@ version: "3.9"
 
 services:
   api-gateway:
-    build: ../apps/api-gateway
-    ports: ["8000:8000"]
+    image: arielson/pizza-api-gateway:latest
+    ports:
+      - "8000:8000"
+    depends_on:
+      - agent-orchestrator
 
   agent-orchestrator:
-    build: ../apps/agent-orchestrator
+    image: arielson/pizza-agent-orchestrator:latest
+    depends_on:
+      - rag-service
+      - mcp-tools-server
 
   rag-service:
-    build: ../apps/rag-service
+    image: arielson/pizza-rag-service:latest
+    environment:
+      DATABASE_URL: postgresql+psycopg2://postgres:postgres@postgres:5432/pizza
+    depends_on:
+      postgres:
+        condition: service_healthy
 
   mcp-tools-server:
-    build: ../apps/mcp-tools-server
+    image: arielson/pizza-mcp-tools:latest
+    environment:
+      DATABASE_URL: postgresql+psycopg2://postgres:postgres@postgres:5432/pizza
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  postgres:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_DB: pizza
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+    - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d pizza"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  ui-streamlit:
+    image: arielson/pizza-ui-streamlit:latest
+    environment:
+      API_GATEWAY_URL: http://api-gateway:8000
+    ports:
+      - "8501:8501"
+    depends_on:
+      - api-gateway
+
