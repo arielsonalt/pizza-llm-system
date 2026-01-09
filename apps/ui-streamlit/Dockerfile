@@ -3,6 +3,7 @@ WORKDIR /app
 
 RUN pip install --no-cache-dir streamlit==1.37.1 requests==2.32.3
 
+COPY packages /app/packages
 COPY apps/ui-streamlit/app.py /app/app.py
 
 EXPOSE 8501

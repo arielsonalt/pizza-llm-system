@@ -1,34 +1,36 @@
-version: "3.9"
-
 services:
   api-gateway:
     image: arielson/pizza-api-gateway:latest
-    ports:
-      - "8000:8000"
-    depends_on:
-      - agent-orchestrator
+    ports: ["8000:8000"]
+    env_file: ["../.env"]
+    depends_on: [agent-orchestrator]
+    environment:
+      AGENT_ORCHESTRATOR_URL: http://agent-orchestrator:8000
 
   agent-orchestrator:
     image: arielson/pizza-agent-orchestrator:latest
-    depends_on:
-      - rag-service
-      - mcp-tools-server
+    env_file: ["../.env"]
+    depends_on: [rag-service, mcp-tools-server]
 
   rag-service:
     image: arielson/pizza-rag-service:latest
-    environment:
-      DATABASE_URL: postgresql+psycopg2://postgres:postgres@postgres:5432/pizza
+    ports: ["8001:8000"]
     depends_on:
       postgres:
         condition: service_healthy
 
   mcp-tools-server:
     image: arielson/pizza-mcp-tools:latest
+    env_file: ["../.env"]
+    ports: ["8002:8000"]
+    depends_on: [postgres]
+
+  ui-streamlit:
+    image: arielson/pizza-ui-streamlit:latest
     environment:
-      DATABASE_URL: postgresql+psycopg2://postgres:postgres@postgres:5432/pizza
-    depends_on:
-      postgres:
-        condition: service_healthy
+      API_GATEWAY_URL: http://api-gateway:8000
+    ports: ["8501:8501"]
+    depends_on: [api-gateway]
 
   postgres:
     image: pgvector/pgvector:pg16
@@ -37,19 +39,11 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
-    - "5432:5432"
+      - "5432:5432"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d pizza"]
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 5s
-      timeout: 3s
-      retries: 20
-
-  ui-streamlit:
-    image: arielson/pizza-ui-streamlit:latest
-    environment:
-      API_GATEWAY_URL: http://api-gateway:8000
-    ports:
-      - "8501:8501"
-    depends_on:
-      - api-gateway
-
+      timeout: 5s
+      retries: 5
+volumes:
+  pgdata:

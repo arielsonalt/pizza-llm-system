@@ -27,6 +27,6 @@ class Order(Base):
     items = Column(JSON, nullable=False)  # [{sku,name,qty,price,mods...}]
     notes = Column(String, nullable=True)
 
-    created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
+    created_at = Column(DateTime, default=datetime.astimezone, nullable=False)
 
     customer = relationship("Customer", back_populates="orders")

@@ -1,9 +1,14 @@
 from fastapi import FastAPI
-from app.graph.flow import graph
+from pydantic import BaseModel
+from app.llm import get_llm
 
 app = FastAPI(title="Agent Orchestrator")
 
-@app.post("/agent/chat")
-async def chat(payload: dict):
-    result = await graph.ainvoke(payload)
-    return result
+class ChatIn(BaseModel):
+    message: str
+
+@app.post("/chat")
+def chat(payload: ChatIn):
+    llm = get_llm()
+    resp = llm.invoke(payload.message)
+    return {"reply": resp.content}

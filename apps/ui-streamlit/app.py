@@ -22,14 +22,12 @@ for m in st.session_state.messages:
 prompt = st.chat_input("Digite seu pedido…")
 
 def call_chat(message: str) -> str:
-    # ajuste o endpoint conforme seu api-gateway
-    # tentativas: /chat ou /api/chat etc.
     for path in ("/chat", "/api/chat"):
         try:
             r = requests.post(f"{api_url}{path}", json={"message": message}, timeout=30)
             if r.status_code == 200:
                 data = r.json()
-                # tente padrões comuns
+              
                 return data.get("reply") or data.get("answer") or data.get("message") or str(data)
         except Exception:
             pass
